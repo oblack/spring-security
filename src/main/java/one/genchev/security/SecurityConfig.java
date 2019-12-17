@@ -18,16 +18,16 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    protected void configure(HttpSecurity httpSecurity) throws Exception {
-//        httpSecurity.authorizeRequests()
-//                .anyRequest().authenticated()
-//                .and().formLogin()
-//                .loginPage("/login2").permitAll();
-//
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder auth)
+//            throws Exception {
+//        auth.inMemoryAuthentication().withUser("test")
+//                .password("test123").authorities("ROLE_USER");
 //    }
 
-    @Autowired
-    DataSource dataSource;
+
+//    @Autowired
+//    DataSource dataSource;
 
 //    @Override
 //    public void configure(AuthenticationManagerBuilder auth)
@@ -37,39 +37,38 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .dataSource(dataSource);
 //    }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth)
-            throws Exception {
-        auth.jdbcAuthentication()
-                .dataSource(dataSource)
-                .withDefaultSchema()
-                .withUser(User.withUsername("user")
-                        .password(passwordEncoder().encode("pass"))
-                        .roles("USER"));
-    }
-
-    @Override
-    protected void configure(HttpSecurity httpSecurity)
-            throws Exception {
-//        httpSecurity.authorizeRequests()
-//                .antMatchers("/h2-console/**")
-//                .permitAll()
-//                .anyRequest()
-//                .authenticated()
-//                .and()
-//                .formLogin();
-
-        httpSecurity.csrf()
-                .ignoringAntMatchers("/h2-console/**");
-        httpSecurity.headers()
-                .frameOptions()
-                .sameOrigin();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-//        encoder.
-        return new BCryptPasswordEncoder();
-    }
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder auth)
+//            throws Exception {
+//        auth.jdbcAuthentication()
+//                .dataSource(dataSource)
+//                .withDefaultSchema()
+//                .withUser(User.withUsername("user")
+//                        .password(passwordEncoder().encode("pass"))
+//                        .roles("USER"));
+//    }
+//
+//    @Override
+//    protected void configure(HttpSecurity httpSecurity)
+//            throws Exception {
+////        httpSecurity.authorizeRequests()
+////                .antMatchers("/h2-console/**")
+////                .permitAll()
+////                .anyRequest()
+////                .authenticated()
+////                .and()
+////                .formLogin();
+//
+//        httpSecurity.csrf()
+//                .ignoringAntMatchers("/h2-console/**");
+//        httpSecurity.headers()
+//                .frameOptions()
+//                .sameOrigin();
+//    }
+//
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+//        return new BCryptPasswordEncoder();
+//    }
 }
