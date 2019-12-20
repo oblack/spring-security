@@ -18,11 +18,11 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth)
+//    @Override
+//    public void configure(AuthenticationManagerBuilder auth)
 //            throws Exception {
 //        auth.inMemoryAuthentication().withUser("test")
-//                .password("test123").authorities("ROLE_USER");
+//                .password("{noop}test123").authorities("ROLE_USER");
 //    }
 
 
@@ -63,7 +63,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .ignoringAntMatchers("/h2-console/**");
 //        httpSecurity.headers()
 //                .frameOptions()
-//                .sameOrigin();
+//                .sameOrigin()
+//                .and()
+//                .rememberMe().key("verySecretKey").tokenValiditySeconds();
 //    }
 //
 //    @Bean
